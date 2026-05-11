@@ -1,0 +1,21 @@
+{
+    "name": "justraviga/classmanager-reverb",
+    "type": "project",
+    "description": "Minimal Laravel skeleton that runs the Classmanager Reverb (WebSocket) host. No domain code, no secrets, no API surface — just enough to run `php artisan reverb:start`.",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0",
+        "laravel/reverb": "^1.10"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
