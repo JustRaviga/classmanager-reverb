@@ -33,6 +33,27 @@ Image Builder clones over anonymous HTTPS with no GitHub credential.
   what Reverb auto-registers.
 - `config/*.php` — minimal config: `app`, `broadcasting`, `reverb`,
   `database` (Redis only), `cache` (array), `logging` (stderr).
+- `bake-test.sh` — local dry-run of the AMI build for fast feedback (see below).
+
+## Verifying changes locally before pushing
+
+The full AMI bake in EC2 Image Builder is ~15 minutes per attempt. `bake-test.sh`
+mirrors the package install + composer install + smoke-test steps inside a
+disposable Docker container so you can validate apt/PECL/composer changes in
+~30 seconds.
+
+From an Apple Silicon Mac:
+
+```
+docker run --rm -v $(pwd)/bake-test.sh:/bake-test.sh \
+  --platform linux/arm64 ubuntu:26.04 bash /bake-test.sh
+```
+
+It catches package-availability and build issues; it does not exercise systemd,
+IAM, networking or the ASG/NLB layer. Use it as a pre-push sanity check, not a
+replacement for the bake itself. If you change PHP version, extensions, or the
+apt list in the Image Builder component (`reverb.yml` in the classmanager
+repo), mirror the changes into `bake-test.sh` so it stays a faithful proxy.
 
 ## Updating Reverb
 
