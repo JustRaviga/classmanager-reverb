@@ -28,6 +28,7 @@ return [
                     'password' => env('REDIS_PASSWORD'),
                     'database' => env('REDIS_DB', '0'),
                     'timeout' => env('REDIS_TIMEOUT', 60),
+                    'scheme' => env('REDIS_SCHEME', 'tls'),
                 ],
             ],
             'pulse_ingest_interval' => env('REVERB_PULSE_INGEST_INTERVAL', 15),
